@@ -1,0 +1,28 @@
+[project]
+name = "clarity-audit-tool"
+authors = ["Your Name"]
+description = "A security analysis tool for auditing smart contracts on the Stacks blockchain"
+telemetry = false
+requirements = []
+boot_contracts = ["pox", "costs-v2", "bns"]
+
+[contracts.audit-registry]
+path = "contracts/audit-registry.clar"
+depends_on = []
+
+[contracts.vulnerability-scanner]
+path = "contracts/vulnerability-scanner.clar"
+depends_on = ["audit-registry"]
+
+[repl]
+costs_version = 2
+parser_version = 2
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
